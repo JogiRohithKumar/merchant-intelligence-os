@@ -1,0 +1,42 @@
+﻿# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+serviceAccountKey.json
+firebase-adminsdk*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.pytest_cache/
+*.pkl
+
+# SQLite & Data
+*.db
+*.sqlite
+*.sqlite3
+data/models/
+data/chroma_db/
+
+# Node / Frontend
+node_modules/
+dist/
+.vite/
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local SQLite runtime files
+backend/*.db
+backend/*.db-shm
+backend/*.db-wal
