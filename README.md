@@ -106,38 +106,76 @@ Identifies:
 # 🔄 How It Works
 
 ```text
-Merchant Query
-      │
-      ▼
-Supervisor Agent
-      │
-      ├──────────────┐
-      ▼              ▼
-   Finance          Risk
-      │              │
-      ├──────┬───────┤
-             ▼
-          Growth
-             │
-             ▼
-         Recovery
-             │
-             ▼
-      Shared Findings
-             │
-             ▼
-       Policy Engine
-             │
-      ┌──────┴──────┐
-      ▼             ▼
- Auto Execute   Human Approval
-      │             │
-      └──────┬──────┘
-             ▼
-        Execution
-             │
-             ▼
-      Audit + Outcome
+                         ┌──────────────────────┐
+                         │      Merchant        │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │   React Frontend     │
+                         │ Dashboard + AI UI    │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │    FastAPI Backend   │
+                         │ Auth + APIs + SSE    │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │ Dynamic Supervisor   │
+                         │ Intent + Task DAG    │
+                         └──────────┬───────────┘
+                                    │
+              ┌─────────────────────┼─────────────────────┐
+              ▼                     ▼                     ▼
+       ┌────────────┐        ┌────────────┐        ┌────────────┐
+       │   Finance  │        │    Risk    │        │   Growth   │
+       │   Agent    │        │   Agent    │        │   Agent    │
+       └──────┬─────┘        └──────┬─────┘        └──────┬─────┘
+              │                     │                     │
+              └─────────────────────┼─────────────────────┘
+                                    ▼
+                         ┌──────────────────────┐
+                         │   Recovery Agent     │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │ Shared Agent State   │
+                         │ + Findings           │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │ Intelligence Engines │
+                         │ ML + Financial Logic │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │    Policy Engine     │
+                         │ Safety + Authorization│
+                         └──────────┬───────────┘
+                                    │
+                    ┌───────────────┼───────────────┐
+                    ▼               ▼               ▼
+              ┌──────────┐   ┌────────────┐   ┌──────────┐
+              │ Execute  │   │  Approval  │   │  Reject  │
+              └────┬─────┘   └─────┬──────┘   └──────────┘
+                   │               │
+                   └───────┬───────┘
+                           ▼
+                ┌──────────────────────┐
+                │ Razorpay APIs/Webhook│
+                └──────────┬───────────┘
+                           │
+                           ▼
+                ┌──────────────────────┐
+                │ Audit + Measurement  │
+                │ + Execution Tracking │
+                └──────────────────────┘
 ```
 
 The system does **not** allow an LLM to directly control financial execution.
